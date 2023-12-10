@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd /opt/jenkins
+
+exec java ${JAVA_ARGS} \
+    -Duser.home=/opt/jenkins/data \
+    -Djenkins.install.runSetupWizard=false \
+    -Djenkins.model.Jenkins.slaveAgentPort=50000 \
+    -jar /opt/jenkins/jenkins.war
