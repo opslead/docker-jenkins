@@ -13,7 +13,7 @@ RUN groupadd -r --gid "$JENKINS_GID" "$JENKINS_GROUP"
 RUN useradd -r --uid "$JENKINS_UID" --gid "$JENKINS_GID" "$JENKINS_USER" -d /opt/jenkins
 RUN mkdir -p /opt/jenkins/data
 COPY entrypoint /opt/jenkins
-RUN chmod +x /opt/jenkins/jenkins
+RUN chmod +x /opt/jenkins/entrypoint
 
 RUN apt-get update && apt-get -y install \
     ca-certificates \
