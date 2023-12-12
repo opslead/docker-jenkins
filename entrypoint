@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export JENKINS_HOME=/opt/jenkins/data
+
 exec java ${JAVA_ARGS} \
     -Duser.home=/opt/jenkins/data \
     -Djenkins.home=/opt/jenkins/data \
