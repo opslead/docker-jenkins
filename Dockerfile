@@ -3,6 +3,8 @@ FROM azul/zulu-openjdk:11
 LABEL maintainer="opslead"
 LABEL repository="https://github.com/opslead/docker-jenkins"
 
+WORKDIR /opt/jenkins
+
 ENV JENKINS_USER="jenkins" \
     JENKINS_UID="8983" \
     JENKINS_GROUP="jenkins" \
@@ -23,11 +25,10 @@ RUN apt-get update && apt-get -y install \
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
         $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
         apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin git && \
-        curl -f -L $JENKINS_DIST_URL -o jenkins.war && \
+        curl -f -L $JENKINS_DIST_URL -o /opt/jenkins/jenkins.war && \
         apt-get -y clean
 
 VOLUME /opt/jenkins/data
-WORKDIR /opt/jenkins
 USER $JENKINS_USER
 
 ENTRYPOINT ["/opt/jenkins/entrypoint"]
