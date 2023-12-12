@@ -26,6 +26,7 @@ RUN apt-get update && apt-get -y install \
         $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null && \
         apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin git && \
         curl -f -L $JENKINS_DIST_URL -o /opt/jenkins/jenkins.war && \
+        chown $JENKINS_USER:$JENKINS_GROUP /opt/jenkins && \
         apt-get -y clean
 
 VOLUME /opt/jenkins/data
